@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "common",
     "app1",
     "app2",
 ]
@@ -37,7 +38,7 @@ ROOT_URLCONF = 'TestToolsSetting.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,6 +92,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR), 'static']
 sys.path.insert(0, os.path.join(BASE_DIR, "apps"))
 sys.path.insert(0, os.path.join(BASE_DIR, "TestToolsSetting"))
 
