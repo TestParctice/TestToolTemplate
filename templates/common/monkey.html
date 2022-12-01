@@ -1,0 +1,162 @@
+<link rel="stylesheet" href="/static/common/css/monkey.css" type="text/css"/>
+<script>
+    $(function () {
+        $('#id_submit').click(function () {
+            packageName = $('#id_package').val()
+            ytime = $('#id_time').val()
+            acount = $('#id_count').val()
+            seed = $('#id_seed').val()
+            touch = $('#id_touch').val()
+            motion = $('#id_motion').val()
+            trackball = $('#id_trackball').val()
+            nav = $('#id_nav').val()
+            najornav = $('#id_najornav').val()
+            syskeys = $('#id_syskeys').val()
+            appswitch = $('#id_appswitch').val()
+            anyevent = $('#id_anyevent').val()
+            bk = $('#id_bk').val()
+            cs = $('#id_cs').val()
+            suc = $('#id_sucess').val()
+            err = $('#id_error').val()
+            if (packageName == null) {
+                alert("请输入包名，否则生成的monkey命令没有任何意义")
+            }
+            if (acount == null) {
+                alert("请输入执行次数（正整数），否则生成的monkey命令没有任何意义")
+            } else {
+                $.ajax({
+                    'url': "/common/get_monkey",
+                    'type': 'get',
+                    "asyns": false,
+                    'data': {
+                        "packageName": packageName, "ytime": ytime,
+                        "acount": acount, "seed": seed, "touch": touch,
+                        "motion": motion, "trackball": trackball, "nav": nav,
+                        "najornav": najornav, "syskeys": syskeys,
+                        "appswitch": appswitch, "anyevent": anyevent,
+                        "bk": bk, "cs": cs, "suc": suc, "err": err
+                    },
+                    error: function () {
+                        $("#id_monkey_text").empty().val("接口返回值错误，请联系开发人员检查接口")
+                    },
+                    success: function (data) {
+                        res = data.text_monkey
+                        $("#id_monkey_text").empty().val(res)
+                    }
+                })
+            }
+        });
+        $("#copy_button_text").click(function () {
+            var input = $('#id_monkey_text');
+            input.select();
+            document.execCommand("Copy");
+        })
+    })
+</script>
+<div id="z_div">
+    <div id="msg_div">
+        <table>
+            <tr>
+                <td><a name="lf">测试程序包名:</a></td>
+                <td><input type="text" id="id_package" name="package" class="text_inputs"/></td>
+                <td><a name="rt" style="color: red">*请输入包名</a></td>
+            </tr>
+            <tr>
+                <td><a name="lf">每个行为的延时(ms):</a></td>
+                <td><input type="text" id="id_time" name="name_time" class="text_inputs"/></td>
+                <td><a name="rt">正整数</a><br/></td>
+            </tr>
+            <tr>
+                <td><a name="lf">执行次数:</a></td>
+                <td><input class="text_inputs" type="text" id="id_count" name="name_count"/></td>
+                <td><a name="rt" style="color: red">*请输入执行次数（正整数）</a></td>
+            </tr>
+            <tr>
+                <td><a name="lf">重现种子seed:</td>
+                <td><input class="inputs" type="text" id="id_seed" name="seed"/></td>
+                <td><a name="rt">正整数</a><br/></td>
+            </tr>
+            <tr>
+                <td><a name="lf">触摸事件touch:</a></td>
+                <td><input class="inputs" type="text" id="id_touch" name="touch"/></td>
+                <td><a name="rt">小于等于100的正整数</a></td>
+            </tr>
+            <tr>
+                <td><a name="lf">动作事件motion:</a></td>
+                <td><input class="inputs" type="text" id="id_motion" name="motion"/></td>
+                <td><a name="rt">小于等于100正整数</a></td>
+            </tr>
+            <tr>
+                <td><a name="lf">轨迹球事件trackball:</a></td>
+                <td><input class="inputs" type="text" id="id_trackball" name="trackball"/></td>
+                <td><a name="rt">小于等于100正整数</a></td>
+            </tr>
+            <tr>
+                <td><a name="lf">基本导航事件nav:</a></td>
+                <td><input class="inputs" type="text" id="id_nav" name="nav"/></td>
+                <td><a name="rt">小于等于100正整数</a></td>
+            </tr>
+            <tr>
+                <td><a name="lf">主要导航事件najornav:</a></td>
+                <td><input class="inputs" type="text" id="id_najornav" name="najornav"/></td>
+                <td><a name="rt">小于等于100正整数</a></td>
+            </tr>
+            <tr>
+                <td><a name="lf">系统关键事件syskeys:</a></td>
+                <td><input class="inputs" type="text" id="id_syskeys" name="syskeys"/></td>
+                <td><a name="rt">小于等于100正整数</a></td>
+            </tr>
+            <tr>
+                <td><a name="lf">运行包内activity%appswitch:</a></td>
+                <td><input class="inputs" type="text" id="id_appswitch" name="appswitch"/></td>
+                <td><a name="rt">小于等于100正整数</a></td>
+            </tr>
+            <tr>
+                <td><a name="lf">其他类型事件anyevent:</td>
+                <td></a><input class="inputs" type="text" id="id_anyevent" name="anyevent"/></td>
+                <td><a name="rt">小于等于100正整数</a></td>
+            </tr>
+            <tr>
+                <td><a name="lf">忽略崩溃:</a></td>
+                <td><input type="radio" value="1" checked="checked" id="id_bk" name="bk"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a name="lf">忽略超时:</a></td>
+                <td><input type="radio" value="1" checked="checked" id="id_cs" name="cs"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a name="lf">正确日志保存路径:</a></td>
+                <td><input class="inputs" type="text" id="id_sucess" name="suc" value="D:/sucess_log.txt"/></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a name="lf">错误日志保存路径:</a></td>
+                <td><input class="inputs" type="text" id="id_error" name="err" value="D:/error_log.txt"/></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><br/><input type="submit" value="生成monkey命令" id="id_submit"/></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+    <div id="texy_div">
+        <textarea rows="6" id="id_monkey_text" class="text_input" cols="188"></textarea>
+    </div>
+    <br/>
+    <div id="copy_div">
+        <input type="submit" value="复制monkey命令" id="copy_button_text">
+    </div>
+    <br/>
+    <div>
+        <a id="a_id">注意:<br/>
+            触摸事件touch ,动作事件motion,轨迹球事件trackball,基本导航事件nav<br/>
+            主要导航事件najornav,系统关键事件syskeys,运行包内activity%appswitch<br/>
+            其他类型事件anyevent，每个数值都为正整数，且和小于等于100
+        </a>
+    </div>
+</div>

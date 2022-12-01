@@ -1,13 +1,129 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <title>首页</title>
+    {#    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>#}
+    <link href="/static/common/css/base.css" type="text/css" rel="stylesheet">
+    <script src="/static/common/js/jquery3.4.1.min.js"></script>
+    <script src="/static/common/js/2.6.0.vue.min.js"></script>
+    <script src="/static/common/js/0.19.0.axios.min.js"></script>
+    <script src="/static/common/js/intercooler-1.2.2.js"></script>
+    <link rel="icon" type="image/x-icon" href="/static/common/Images/Icos/head_portrait.ico">
+    <title>测试平台</title>
+    <script type="text/javascript">
+        function juage(pelement, selement) {
+            console.log(pelement + selement)
+            $(pelement).each(function () {
+                if ($(selement).is(':hidden')) {
+                    console.log("hidden -->show")
+                    $(selement).show()
+                } else {
+                    console.log("show -->hidden")
+                    $(selement).hide()
+                }
+            })
+        }
+
+        function juage_easy(element) {
+            if ($(element).is(':hidden')) {
+                $(element).show()
+            } else {
+                $(element).hide()
+            }
+        }
+
+        function clear_page() {
+            $('#right_content_res').html("")
+        }
+
+        function jump_page(url) {
+            clear_page()
+
+        }
+    </script>
+    <script>
+        $(function () {
+            $("#common").show()
+            $("#practe_ui").show()
+            $("#practe_api").hide()
+        });
+    </script>
 </head>
 <body>
-<h1>
-    common
-</h1>
+<div class="all">
+    <div id="left_content" class="left_content">
+        <div class="catalogue">
+            <div class="First_level_title" onclick="juage_easy('#common')">
+                <div>公共模块</div>
+                <span style="width: 3rem;"></span>
+            </div>
+            <div class="modular">
+                <div id="common">
+                    <div class="Seconde_level_title" ic-post-to="common/get_message" ic-target="#right_content_input"
+                         onclick="clear_page()">
+                        常用数据获取
+                    </div>
+                    <div class="Seconde_level_title" ic-post-to="common/monkey" ic-target="#right_content_input"
+                         onclick="clear_page()">
+                        monkey命令生成
+                    </div>
+                </div>
+            </div>
+            <div class="First_level_title">
+                <div onclick="juage_easy('#practe')">自动化练习</div>
+                <span style="width: 3rem;"></span>
+            </div>
+            <div id="practe">
+                <div class="Seconde_level_title">
+                    <div onclick="juage_easy('#practe_ui')">WEBUI</div>
+                    <span style="width: 3rem;"></span>
+                </div>
+                <div id="practe_ui">
+                    <div>
+                        <div class="Third_level_title" ic-post-to="practice/get_webelements"
+                             ic-target="#right_content_input"
+                             onclick="clear_page()">
+                            操作页面元素
+                        </div>
+                        <div class="Third_level_title" ic-post-to="practice/get_loation"
+                             ic-target="#right_content_input"
+                             onclick="clear_page()">
+                            演练定位方法
+                        </div>
+                    </div>
+                </div>
+                <div class="Seconde_level_title">
+                    <div onclick="juage_easy('#practe_api')">API</div>
+                    <span style="width: 3rem;"></span>
+                </div>
+                <div id="practe_api">
+                    <div>
+                        <div class="Third_level_title">
+                            接口文档
+                        </div>
+                        <div class="Third_level_title">
+                            压测练习
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="right_content" class="right_content">
+        <div id="right_content_input"
+             style="width: auto;display: flex;flex-direction: column;border-width: 0;max-height: 100vh;">
+            <div style="display: flex;align-items: center;border-width: 0;flex-direction: column;">
+                <p style="color: #000;font-size: 2rem;font-weight: 500;">欢迎使用测试平台</p><br>
+                <p style="font-size: 1rem;">
+                    使用中如有问题请联系维护人<br>
+                </p>
+            </div>
+        </div>
+        <span><br></span>
+        <div id="right_content_res" style="display: flex;flex-direction: column;border-width: 0;"></div>
+    </div>
+</div>
+
+
 </body>
 </html>

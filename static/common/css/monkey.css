@@ -1,0 +1,59 @@
+#z_div {
+    text-align: center;
+}
+
+.lf {
+    display: block;
+    text-align: left;
+}
+
+.rt {
+    display: block;
+    text-align: right;
+}
+
+#id_submit,
+#copy_button_text {
+    border-radius: 30px;
+    color: #FFF;
+    background-color: #909399;
+    border-color: #909399;
+    height: 25px;
+}
+
+#a_id {
+    /*display: block;*/
+    text-align: center;
+}
+
+.text_input {
+    height: 100px;
+    line-height: 14px;
+    border-radius: 5px;
+    padding: 10px 10px;
+    vertical-align: middle;
+    background: yellowgreen;
+    text-align: center;
+    font-weight: bold;
+    width: 600px;
+}
+.text_inputs {
+    height: 10px;
+    line-height: 14px;
+    border-radius: 5px;
+    padding: 10px 10px;
+    vertical-align: middle;
+    background: yellowgreen;
+    text-align: center;
+    font-weight: bold;
+    /*width: 50vw;*/
+}
+.inputs {
+    height: 10px;
+    line-height: 14px;
+    border-radius: 5px;
+    padding: 10px 10px;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bold;
+}
