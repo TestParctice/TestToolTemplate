@@ -1,0 +1,147 @@
+<link rel="stylesheet" href="/static/practice/css/api.css" type="text/css"/>
+<script>
+    $('#btn').click(function () {
+        var re_url = document.getElementById("api_url").value
+        var params = document.getElementById("api_params").value
+        var api_type = document.getElementById("api_type").value
+        if (api_type === "") {
+            api_type = "GET"
+        }
+        var params_type = document.getElementById("params_type").value
+        if (params_type === "") {
+            params_type = "jsonp"
+        }
+        var api_request_header = document.getElementById("api_request_header").value
+        if (api_request_header === '') {
+            api_request_header = {'Access-Control-Allow-Origin': '*'}
+        }
+        if (re_url === "") {
+            alert("URL不能为空")
+        } else {
+            $.ajax({
+                'url': re_url,
+                'dataType': params_type,
+                "type": api_type,
+                "data": params,
+                "header": api_request_header,
+                //"beforeSend": function (xhr) {
+                   // xhr.setRequestHeader(api_request_header["Access-Control-Expose-Headers"] = "Authorization")
+                //},
+            }).done(function (data) {
+                console.log(data)
+                $("#res_request").empty().val(JSON.stringify(data))
+                {#console.log(xhr.getAllResponseHeaders())#}
+                var res_data = JSON.stringify(data)
+                $.ajax({
+                    'url': '/practice/preservation',
+                    'dataType': 'json',
+                    "type": 'post',
+                    "data": {
+                        "url": re_url,
+                        "res_data": res_data,
+                        "params": params,
+                        "api_type": api_type,
+                        "dataType": params_type,
+                        "header": api_request_header
+                    },
+                }).done(function (res) {
+                    $("#res_request").empty().val(res.res_data)
+                })
+            })
+
+        }
+    })
+
+    $("#copy_res").click(function () {
+        var input = $('#res_request');
+        input.select();
+        document.execCommand("Copy");
+    })
+
+    function get_headers() {
+        var req = new XMLHttpRequest();
+        req.open('GET', document.location, false);
+        req.send(null);
+        var res_headers = req.getAllResponseHeaders().toLowerCase();
+        return res_headers
+    }
+
+</script>
+<div>
+    <div id="api_request">
+        <table>
+            <tr>
+                <td></td>
+                <td style="padding-left: 20%">请求信息</td>
+            </tr>
+            <tr>
+                <th>API_URL</th>
+                <td>
+                    <input id="api_url" type="text" class="text_input"
+                           placeholder="请输入URL：例如：https://fanyi.youdao.com/translate_o?smartresult=dict&smartresult=rule">
+                </td>
+                <td><a style="color: red">*</a></td>
+            </tr>
+            <tr>
+                <th>请求方式</th>
+                <td>
+                    <select name="api_type" id="api_type" style="color: blue">
+                        <option value="">请选择方法:不选默认GET方法</option>
+                        {% for type in typelist %}
+                            <option value={{ type }}>{{ type }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><a>参数</a></th>
+                <td>
+                    <input name="api_params" id="api_params" class="text_input" placeholder="请输入参数，非必填">
+                </td>
+            </tr>
+            <tr>
+                <th>参数类型</th>
+                <td>
+                    <select name="params_type" id="params_type" style="color: blue">
+                        <option value="">参数类型，可不选，默认为jsonp类型</option>
+                        {% for params_type in params_typelist %}
+                            <option value={{ params_type }}>{{ params_type }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td><a style="color: red">跨域请求请用jsonp类型</a></td>
+            </tr>
+            <tr>
+                <th>请求头</th>
+                <td>
+                    <input id="api_request_header" type="text" class="text_input"
+                           placeholder="如果有请求头，请使用json类型上传请求头"
+                           value="{'Access-Control-Allow-Origin': '*'}">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="padding-left: 5vw;">
+                    <input type="button" id="btn" value="请求api">
+                </td>
+            </tr>
+        </table>
+    </div>
+    </br></br></br>
+    <div id="api_response">
+        <table>
+            <tr>
+                <td></td>
+                <td style="padding-left: 7vw;">接口响应</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3"><textarea rows="6" id="res_request"></textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="padding-left: 7vw;"><input type="button" id="copy_res" value="复制返回值"></td>
+            </tr>
+        </table>
+    </div>
+</div>

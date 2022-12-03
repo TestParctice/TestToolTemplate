@@ -1,7 +1,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    {#    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>#}
     <link href="/static/common/css/base.css" type="text/css" rel="stylesheet">
     <script src="/static/common/js/jquery3.4.1.min.js"></script>
     <script src="/static/common/js/2.6.0.vue.min.js"></script>
@@ -103,9 +102,13 @@
                         <div class="Third_level_title">
                             压测练习
                         </div>
+                        <div class="Third_level_title" ic-post-to="practice/get_api_request"
+                             ic-target="#right_content_input"
+                             onclick="clear_page()">
+                            调用接口
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

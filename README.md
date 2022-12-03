@@ -31,7 +31,15 @@ config.py: mysql_message = {'ENGINE': 'django.db.backends.mysql', 'NAME': '', 'U
 >logs
 >>日志存放路径
 
+# 本地调试
+```
+迁移：
+python manage.py makemigrations
+python manage.py migrate
 
+运行
+python manage.py runserver 127.0.0.1:80
+```
 
 
 
