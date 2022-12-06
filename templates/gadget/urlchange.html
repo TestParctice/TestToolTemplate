@@ -1,0 +1,54 @@
+<script>
+    $(function () {
+        var url = document.getElementsByClassName("_input_url").val
+        var param = document.getElementsByClassName("_input_param").val
+        var header = document.getElementsByClassName("_input_header").val
+        var url = document.getElementsByClassName("_input_url").val
+        $('#btn_request').click(function () {
+            if (url === "") {
+                $("#res_request").empty()
+                alert("URL不能为空")
+            }
+        })
+    })
+
+</script>
+
+<div>
+    <div>
+        <table>
+            <tr>
+                <td><a>URL:</a></td>
+                <td><input type="text" placeholder="输入URL" class="_input_url"></td>
+            </tr>
+            <tr>
+                <td><a>方式:</a></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a>参数:</a></td>
+                <td><input type="text" placeholder="输入参数" class="_input_param"></td>
+            </tr>
+            <tr>
+                <td><a>请求头</a></td>
+                <td><input type="text" placeholder="请求头" class="_input_header"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" value="访问" id="btn_request"></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <div>
+            <table>
+                <tr>
+                    <td><textarea rows="6" id="res_request"></textarea></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="复制响应"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -2,5 +2,5 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpRequest
 
 
-def index(request: HttpRequest):
-    return render(request, "app2/app2.html")
+def get_urlchange_page(request: HttpRequest):
+    return render(request, "gadget/urlchange.html")

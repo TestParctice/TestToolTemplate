@@ -44,6 +44,8 @@
             $("#common").show()
             $("#practe_ui").show()
             $("#practe_api").hide()
+            $("#transformTab").hide()
+            $("#transform").hide()
         });
     </script>
 </head>
@@ -95,6 +97,49 @@
                     <span style="width: 3rem;"></span>
                 </div>
                 <div id="practe_api">
+                    <div>
+                        <div class="Third_level_title">
+                            接口文档
+                        </div>
+                        <div class="Third_level_title">
+                            压测练习
+                        </div>
+                        <div class="Third_level_title" ic-post-to="practice/get_api_request"
+                             ic-target="#right_content_input"
+                             onclick="clear_page()">
+                            调用接口
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="First_level_title">
+                <div onclick="juage_easy('#transformTab')">小工具汇总</div>
+                <span style="width: 3rem;"></span>
+            </div>
+            <div id="transformTab">
+                <div class="Seconde_level_title">
+                    <div onclick="juage_easy('#transform')">转换相关</div>
+                    <span style="width: 3rem;"></span>
+                </div>
+                <div id="transform">
+                    <div>
+                        <div class="Third_level_title" ic-post-to="gadget/urlchange"
+                             ic-target="#right_content_input"
+                             onclick="clear_page()">
+                            长链转短链
+                        </div>
+                        <div class="Third_level_title" ic-post-to="practice/get_loation"
+                             ic-target="#right_content_input"
+                             onclick="clear_page()">
+                            演练定位方法
+                        </div>
+                    </div>
+                </div>
+                <div class="Seconde_level_title">
+                    <div onclick="juage_easy('#11')">调试相关</div>
+                    <span style="width: 3rem;"></span>
+                </div>
+                <div id="11">
                     <div>
                         <div class="Third_level_title">
                             接口文档

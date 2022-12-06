@@ -21,3 +21,17 @@ class APIInfo(models.Model):
 
     class Meta:
         db_table = 'apiRecord'
+
+
+class URLInfo(models.Model):
+    id = models.AutoField(primary_key=True)
+    longUrl = models.CharField(max_length=2000)
+    smallUrl = models.CharField(max_length=10)
+    isDel = models.IntegerField(default=0)
+    ipMsg = models.CharField(max_length=200)
+    ctime = models.DateTimeField(auto_now=True)
+    utime = models.DateTimeField(auto_now=True)
+    remark = models.CharField(max_length=2500, default="")
+
+    class Meta:
+        db_table = 'urlRecord'
